@@ -12,7 +12,7 @@ ARG PASSWORD
 # -l in useradd needed to avoid some large sparse log file
 # https://github.com/moby/moby/issues/5419
 RUN apt-get update \
- && apt-get install -y git mc aptitude tig pgadmin4 xterm lynx \
+ && apt-get install -y git mc aptitude tig xterm lynx \
                        iproute2 openssh-server \
 &&  groupadd -g $GROUP_ID $GROUPNAME \
 &&  useradd -l -u $USER_ID -g $GROUPNAME -m $USERNAME \
