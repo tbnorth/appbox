@@ -12,7 +12,7 @@ $PRIV docker run --tty --interactive --rm \\
     -v /tmp:/tmp \\
     -v \${HOME}:/home/\${USER} \\
     -v /tmp/.X11-unix:/tmp/.X11-unix \\
-    appbox xterm
+    ${USERNAME}_appbox xterm
 EOT
 
 cat > _build.sh << EOT
@@ -23,7 +23,7 @@ $PRIV docker build \\
        --build-arg USERNAME=$USERNAME \\
        --build-arg GROUPNAME=`id -gn` \\
        --build-arg PASSWORD=\$PASSWORD \\
-       --tag appbox .
+       --tag ${USERNAME}_appbox .
 EOT
 
 echo Created _build.sh and _runX11.sh:

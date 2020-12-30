@@ -13,11 +13,12 @@ ARG PASSWORD
 # https://github.com/moby/moby/issues/5419
 RUN apt-get update \
  && apt-get install -y git mc aptitude tig xterm lynx \
-                       iproute2 openssh-server \
-&&  groupadd -g $GROUP_ID $GROUPNAME \
-&&  useradd -l -u $USER_ID -g $GROUPNAME -m $USERNAME \
-&&  echo $USERNAME:$PASSWORD | chpasswd
+                       iproute2 openssh-server screen \
+ && groupadd -g $GROUP_ID $GROUPNAME \
+ && useradd -l -u $USER_ID -g $GROUPNAME -m $USERNAME \
+ && echo $USERNAME:$PASSWORD | chpasswd \
+ && mkdir /run/sshd
 
 # run in non-daemon mode
-CMD ["sshd", "-D"]
+CMD ["/usr/sbin/sshd", "-D"]
 
