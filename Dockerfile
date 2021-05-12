@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM ubuntu:20.04
 
 # prevent time zone config. asking questions
 ARG DEBIAN_FRONTEND=noninteractive
@@ -17,7 +17,8 @@ RUN apt-get update \
  && groupadd -g $GROUP_ID $GROUPNAME \
  && useradd -l -u $USER_ID -g $GROUPNAME -m $USERNAME \
  && echo $USERNAME:$PASSWORD | chpasswd \
- && mkdir /run/sshd
+ && mkdir /run/sshd \
+ && sed -i 's/#X11UseLocalhost yes/X11UseLocalhost no/' /etc/ssh/sshd_config
 
 # run in non-daemon mode
 CMD ["/usr/sbin/sshd", "-D"]
