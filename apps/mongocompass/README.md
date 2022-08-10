@@ -9,6 +9,7 @@ How I use this in practice
 In one shell:
 
 ```shell
+docker build -t compassbox --build-arg USERNAME=$USERNAME .  # once only
 docker run --rm -it -p 30022:22 -v $HOME:$HOME --name compassbox --privileged compassbox
 ```
 
