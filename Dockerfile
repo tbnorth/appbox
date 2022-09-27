@@ -1,4 +1,4 @@
-FROM ubuntu:20.04
+FROM ubuntu:22.04
 
 # prevent time zone config. asking questions
 ARG DEBIAN_FRONTEND=noninteractive
