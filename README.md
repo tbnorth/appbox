@@ -79,6 +79,7 @@ After `docker-compose up -d` you can SSH to the `appbox` container, at
 `example.com:30033` in the example below, and reach the other images
 at URLs like `127.0.0.1:30030`, `127.0.0.1:38111` etc.
 
+`timezone.env` should be something like `TZ=America/Chicago`.
 
 ```docker-compose
 services:
