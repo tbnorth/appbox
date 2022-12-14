@@ -65,3 +65,71 @@ MobaXTerm on `desktopB` to log in to your container (on port 2222 on `serverA`)
 either by setting up an SSH Jump host in MobaXTerm, or just forwarding port
 2222 to `serverA` via a regular ssh session and then logging in to your
 container via 127.0.0.1 (on `desktopB`) on port 2222.
+
+## Using appbox to run other images behind a SSH tunnel
+
+Build the basic `appbox` as above, and use a docker-compose.yml like the one
+below.
+
+Then setup up SSH port forwarding rules like this (PuTTy example):
+
+![PuTTy example](./puttyex.png)
+
+After `docker-compose up -d` you can SSH to the `appbox` container, at
+`example.com:30033` in the example below, and reach the other images
+at URLs like `127.0.0.1:30030`, `127.0.0.1:38111` etc.
+
+
+```docker-compose
+services:
+
+  door:
+    env_file:
+      - timezone.env
+    image: username_appbox
+    ports:
+      - "30033:22"
+    deploy:
+      restart_policy:
+        condition: any
+
+  adminer:
+    env_file:
+      - timezone.env
+    image: adminer
+    environment:
+      - ADMINER_DESIGN=dracula
+    deploy:
+      restart_policy:
+        condition: any
+
+  http:
+    env_file:
+      - timezone.env
+    image: httpd:latest
+    volumes:
+      - /home/username/repo:/usr/local/apache2/htdocs
+    deploy:
+      restart_policy:
+        condition: any
+
+  trilium:
+    env_file:
+      - timezone.env
+    image: zadam/trilium:latest
+    volumes:
+      - /home/username/trilium-data:/home/node/trilium-data
+    deploy:
+      restart_policy:
+        condition: any
+
+  tattle_sitemon:
+    env_file:
+      - timezone.env
+    image: tattle_sitemon
+    volumes:
+      - /home/username/repo/tattle_sitemon/data:/data
+    deploy:
+      restart_policy:
+        condition: any
+```
