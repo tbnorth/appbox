@@ -1,7 +1,7 @@
 # not without 3 year old docker
 # ARG USERNAME
 # FROM ${USERNAME}_appbox
-FROM tbrown02_appbox
+FROM seqacyp_base
 
 # prevent time zone config. asking questions
 ARG DEBIAN_FRONTEND=noninteractive

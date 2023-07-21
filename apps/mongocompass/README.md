@@ -1,3 +1,5 @@
+# NOTE:  *** IMPORTANT *** compassbox needs to be built on a 20.04 based image
+
 Might need the `--privileged` flag for this one:
 
 ```shell
@@ -9,7 +11,7 @@ How I use this in practice
 In one shell:
 
 ```shell
-docker build -t compassbox --build-arg USERNAME=$USERNAME .  # once only
+docker build -t compassbox --build-arg USERNAME=$USER .  # once only
 docker run --rm -it -p 30022:22 -v $HOME:$HOME --name compassbox --privileged compassbox
 ```
 
