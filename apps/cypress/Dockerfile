@@ -30,7 +30,7 @@ RUN chown $USERNAME.$GROUPNAME /app \
 USER $USERNAME
 
 RUN cd /home/$USERNAME \
- && yarn add cypress --dev --ignore-engines \
+ && yarn add cypress@12.10 --dev --ignore-engines \
  && yarn run cypress verify
 
 # needed for entrypoint
